@@ -4,7 +4,7 @@ __STACK_SIZE = 0x400;
 MEMORY
 {
   ROM  (rx): ORIGIN = 0x08000000, LENGTH = 1M
-  SRAM (rwx): ORIGIN = 0x20000000, LENGTH = 128K
+  SRAM (rw): ORIGIN = 0x20000000, LENGTH = 128K
   /* CCM (rw): ORIGIN = 0x10000000, LENGTH = 192K */
   BSRAM (rw): ORIGIN = 0x08000000, LENGTH = 4K
 }
@@ -13,7 +13,7 @@ ENTRY(Reset_Handler)
 
 SECTIONS
 {
-  .vectors :
+  .vectors (READONLY) :
   {
     KEEP(*(.vectors))
   } > ROM
