@@ -7,12 +7,20 @@ C_FILES = src/startup.c \
 	  src/driver/hal_dev.c \
 	  src/driver/hal_uart.c
 
+C_FILES += FreeRTOS-Kernel/tasks.c \
+	   FreeRTOS-Kernel/timers.c \
+	   FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c \
+	   FreeRTOS-Kernel/list.c \
+	   FreeRTOS-Kernel/queue.c \
+	   FreeRTOS-Kernel/stream_buffer.c \
+	   FreeRTOS-Kernel/event_groups.c \
+	   FreeRTOS-Kernel/portable/MemMang/heap_4.c
+
 ### C Macros -D name=definition or -D name -U name
 C_MACROS = 
 
 ### C Includes --include file
-C_INCLUDES =-I include/
-
+C_INCLUDES =-I include/ -I FreeRTOS-Kernel/include/ -I FreeRTOS-Kernel/portable/GCC/ARM_CM4F/
 
 ### Standard flags
 C_FLAGS =-std=c11
