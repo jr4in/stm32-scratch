@@ -2,6 +2,24 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
+/* In most cases, configCPU_CLOCK_HZ must be set to the frequency of the clock
+ * that drives the peripheral used to generate the kernels periodic tick
+ * interrupt. The default value is set to 20MHz and matches the QEMU demo
+ * settings.  Your application will certainly need a different value so set this
+ * correctly. This is very often, but not always, equal to the main system clock
+ * frequency. */
+#define configCPU_CLOCK_HZ ((unsigned long)16000000)
+
+/* configTICK_RATE_HZ sets frequency of the tick interrupt in Hz, normally
+ * calculated from the configCPU_CLOCK_HZ value. */
+#define configTICK_RATE_HZ 100
+
+/* Sets the total size of the FreeRTOS heap, in bytes, when heap_1.c, heap_2.c
+ * or heap_4.c are included in the build.  This value is defaulted to 4096 bytes
+ * but it must be tailored to each application.  Note the heap will appear in
+ * the .bss section.  See https://www.freertos.org/a00111.html. */
+#define configTOTAL_HEAP_SIZE 4096
+
 /* Time is measured in 'ticks' - which is the number of times the tick interrupt
  * has executed since the RTOS kernel was started.
  * The tick count is held in a variable of type TickType_t.
