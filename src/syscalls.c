@@ -15,7 +15,7 @@ extern int errno;
 char *__env[1] = {0};
 char **environ = __env;
 
-void exit(int UNUSED(status)) {
+void _exit(int UNUSED(status)) {
   while (1)
     ;
 }
@@ -26,7 +26,10 @@ int _lseek(int UNUSED(file), int UNUSED(ptr), int UNUSED(dir)) { return 0; }
 
 int _read(int UNUSED(file), char *UNUSED(ptr), int UNUSED(len)) { return 0; }
 
-int _write(int UNUSED(file), char *UNUSED(ptr), int len) { return len; }
+int _write(int UNUSED(file), char *UNUSED(ptr), int len) { 
+
+  return len; 
+}
 
 caddr_t _sbrk(int UNUSED(incr)) {
 #if 0
@@ -59,7 +62,16 @@ caddr_t _sbrk(int UNUSED(incr)) {
 //   return -1;
 // }
 
-// int fstat(int file, struct stat *st) {
-//   st->st_mode = S_IFCHR;
-//   return 0;
-// }
+int _fstat(int UNUSED(file), struct stat *st) {
+  st->st_mode = S_IFCHR;
+  return 0;
+}
+
+int _isatty(int UNUSED(file)) { return 1; }
+
+int _getpid(void) { return 1; }
+
+int _kill(int UNUSED(pid), int UNUSED(sig)) {
+  errno = EINVAL;
+  return -1;
+}
